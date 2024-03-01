@@ -1,0 +1,16 @@
+money-tracker-app/
+├── node_modules/
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── script.js
+├── views/
+│   ├── index.ejs
+│   ├── addTransaction.ejs
+│   └── layout.ejs
+├── models/
+│   └── Transaction.js
+├── routes/
+│   └── index.js
+└── server.js
