@@ -1,0 +1,36 @@
+// routes/index.js
+const express = require('express');
+const router = express.Router();
+const Transaction = require('../models/Transaction');
+
+// Index Route - Display all transactions
+router.get('/', async (req, res) => {
+    try {
+        const transactions = await Transaction.find().sort({ date: 'desc' });
+        res.render('index', { transactions });
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// New Transaction Route - Form to add a new transaction
+router.get('/transactions/new', (req, res) => {
+    res.render('addTransaction');
+});
+
+// Create Transaction Route - Save a new transaction
+router.post('/transactions', async (req, res) => {
+    const transaction = new Transaction({
+        description: req.body.description,
+        amount: req.body.amount,
+        type: req.body.type
+    });
+    try {
+        await transaction.save();
+        res.redirect('/');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+module.exports = router;
